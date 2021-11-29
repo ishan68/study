@@ -1,0 +1,130 @@
+Step1:-
+
+dotnet installtion is same as provided by you, only change is that we need to set diffrent port numbers for both websites
+
+
+So copied dotnet project files in two diffrent folders
+
+folder1 - site1
+folder2 -site2
+
+step2:-
+
+cd site1
+
+Now we need to change port number by adding code 
+
+vim appsettings.json
+"Kestrel": {
+             "EndPoints": {
+               "Http": {
+                "Url": "http://localhost:4300"
+                                            }
+                                         }
+                                        },
+
+
+Step 3:-
+
+ cd ../site2
+
+change port number here as well by adding code
+
+vim appsettings.json
+"Kestrel": {
+             "EndPoints": {
+               "Http": {
+                "Url": "http://localhost:4200"
+                                            }
+                                         }
+                                        },
+
+
+
+
+Step4:-
+
+We can check weather ports are conflicting or not by running server for both website on both directory site1 and site2
+
+dotnet EcoTechAPIs.dll
+
+Now install nginx as you did on EC2 instance
+
+
+Creating virtual host--------
+
+Step5:-
+
+vim /etc/nginx/sites-available/site1.example.com
+
+ code inside--
+
+server
+{
+    listen 80;
+    listen [::]:80;
+    server_name site1.example.com www.site1.example.com;
+
+    location /
+    {
+        proxy_pass http://127.0.0.1:4300;
+        proxy_http_version 1.1;
+       proxy_set_header Upgrade $http_upgrade;
+       proxy_set_header Connection keep-alive;
+       proxy_set_header Host $host;
+       proxy_cache_bypass $http_upgrade;
+    }
+}
+
+Step6:-
+same for website2
+vim /etc/nginx/sites-available/site2.example.com
+
+server
+{
+    listen 80;
+    listen [::]:80;
+    server_name site2.example.com www.site2.example.com;
+
+    location /
+    {
+        proxy_pass http://127.0.0.1:4200;
+        proxy_http_version 1.1;
+       proxy_set_header Upgrade $http_upgrade;
+       proxy_set_header Connection keep-alive;
+       proxy_set_header Host $host;
+       proxy_cache_bypass $http_upgrade;
+    }
+}
+
+
+Step7:-
+creation of soft links to enable these configuration------
+
+ln -s /etc/nginx/sites-available/site1.example.com.conf /etc/nginx/sites-enabled/
+
+ln -s /etc/nginx/sites-available/site2.example.com.conf /etc/nginx/sites-enabled/
+
+
+step8:-
+
+nginx -t 
+
+systemctl restart nginx 
+
+Start server on site1
+ 
+Step9:-
+
+dotnet EcoTechAPIs.dll
+
+start server on site 2
+
+dotnet EcoTechAPIs.dll
+
+
+
+
+
+
+

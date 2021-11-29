@@ -1,0 +1,18 @@
+pipeline {
+    agent any
+    environment {
+        PATH = "/usr/bin:$PATH"
+    }
+    stages {
+        stage("git clone"){
+            steps{
+                git credentialsId: 'git_cred', url: 'https://github.com/ishan68/hello-world'
+            }
+        }
+        stage("build"){
+            steps{
+                sh "mvn clean install" 
+            }
+        }
+    }
+}

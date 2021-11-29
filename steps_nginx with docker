@@ -1,0 +1,368 @@
+Step1 :1-
+Installed nginx on ec2 ubuntu instance as usual
+
+
+Step:-2
+
+
+Install docker on ubuntu
+
+apt-get update
+
+sudo apt install docker.io
+
+sudo systemctl start docker
+sudo systemctl enable docker
+
+
+Installed dependencies
+
+sudo apt-get install apt-transport-https ca-certificates curl software-properties-common
+
+
+Step3:-
+
+Pull ubutnu image with systemd service as we need this service to keep instances alive permanently
+
+
+docker pull jrei/systemd-ubuntu
+
+
+Check docker image
+
+docker images
+
+Now attach docker image to container and expose localhost port 8080
+
+docker run -d --name systemd_api -p 8080:80 --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro jrei/systemd-ubuntu
+
+check running container 
+
+docker ps
+
+It must show a cotianer named as systemd_api with port 8080
+
+now to check into conatiner use command
+
+docker exec -it systemd_api bash
+
+It will open container as bash
+
+Now install dotent, nginx as usual on this container
+
+----------------------------------------------------------------------------------------------------
+
+
+Install Nginx
+sudo apt-get update
+
+sudo apt-get install nginx
+
+sudo service nginx start
+
+Check with public IP if running or not... Will show Welcome to ngnix like...
+public_IP:8080
+
+Step: 3
+Install Asp.net Core 3.1 on Ubuntu
+
+wget -q https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb
+
+sudo dpkg -i packages-microsoft-prod.deb
+
+sudo add-apt-repository universe
+
+sudo apt-get install apt-transport-https
+
+sudo apt-get update
+
+sudo apt-get install dotnet-sdk-3.1
+
+Guidelines: https://dotnet.microsoft.com/download/linux-package-manager/ubuntu18-04/sdk-2.2.203
+
+Step 4:
+
+Configure Nginx:
+
+sudo nano /etc/nginx/sites-available/default
+
+Now default file will be in edit mode, replace location section of file with below configuration.
+
+location / {
+
+proxy_pass http://localhost:5000;
+
+proxy_http_version 1.1;
+
+proxy_set_header Upgrade $http_upgrade;
+
+proxy_set_header Connection keep-alive;
+
+proxy_set_header Host $host;
+
+proxy_cache_bypass $http_upgrade;
+
+}
+
+We can see proxy_pass shall pass the each request to http://localhost:5000. Now save the file and to check if file has no error, run command:
+
+sudo nginx -t
+
+Now we can reload the configuration file with command:
+
+    sudo nginx -s reload
+
+If now we hit public-ip of instance with port 8080, we do not get nginx startup page instead we get 502 bad getway response. It is because we are routing requests to http://localhost:5000 but localhost is not yet setup and running.
+
+
+Step 5:
+
+Now exit from docker with ctrl+d
+
+close the terminal for instance as well. Now copy the zip file api_publish.zip from local to ec2 instance with filezilla at location /home/ubuntu
+
+Now copy the file from ec2 instance to docker conatiner with command
+
+docker cp api_publish.zip systemd_api:/var/www/html
+
+Now get into docker conatiner with command
+
+docker exec -it systemd_api bash
+
+We are inside docker again
+
+Step 6:
+
+install some packages
+
+apt install vim zip wget
+
+cd /var/www/html
+
+Now, extract tha file api_publish.zip
+
+unzip api_publish.zip
+
+cd publish
+
+dotnet Project_name.dll
+
+
+Step 7:
+
+now check status with
+http://IP:8080/api/website
+
+If its working then we need to make it permanently alive
+
+
+Step 8:
+
+vim /etc/systemd/system/ServiceFile.service
+
+add code--
+
+[Unit]
+Description=ASP .NET Web Application
+[Service]
+WorkingDirectory=/var/www/html/publish
+ExecStart=/usr/bin/dotnet /var/www/html/publish/EcoTechAPIs.dll
+Restart=always
+RestartSec=10
+SyslogIdentifier=netcore-demo
+User=www-data
+Environment=ASPNETCORE_ENVIRONMENT=Production
+[Install]
+WantedBy=multi-user.target
+
+
+systemctl enable ServiceFile.service
+
+systemctl start ServiceFile.service
+
+systemctl status ServiceFile.service
+
+Step 9:
+
+
+Now close the docker to check if its still running
+
+http://IP:8080/api/website
+
+
+
+****************************************************************************************************
+
+Step 10:
+
+Now create another conatiner from same image for admin
+
+docker run -d --name systemd_admin -p 8081:80 --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro jrei/systemd-ubuntu
+
+
+check running docker container
+
+docker ps
+
+It must shows two conatiner
+
+Step 11:
+ Now get into docker container
+
+ docker exec -it systemd_admin bash
+
+
+ step 12:
+
+ Now we have to do all steps that we performed in docker cotainer systemd_api
+
+ ------------------------------------------------------------------------------------
+
+
+Install Nginx
+sudo apt-get update
+
+sudo apt-get install nginx
+
+sudo service nginx start
+
+Check with public IP if running or not... Will show Welcome to ngnix like...
+public_IP:8081
+
+Step: 13
+Install Asp.net Core 3.1 on Ubuntu
+
+wget -q https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb
+
+sudo dpkg -i packages-microsoft-prod.deb
+
+sudo add-apt-repository universe
+
+sudo apt-get install apt-transport-https
+
+sudo apt-get update
+
+sudo apt-get install dotnet-sdk-3.1
+
+Guidelines: https://dotnet.microsoft.com/download/linux-package-manager/ubuntu18-04/sdk-2.2.203
+
+Step 14:
+
+Configure Nginx:
+
+sudo nano /etc/nginx/sites-available/default
+
+Now default file will be in edit mode, replace location section of file with below configuration.
+
+location / {
+
+proxy_pass http://localhost:5000;
+
+proxy_http_version 1.1;
+
+proxy_set_header Upgrade $http_upgrade;
+
+proxy_set_header Connection keep-alive;
+
+proxy_set_header Host $host;
+
+proxy_cache_bypass $http_upgrade;
+
+}
+
+We can see proxy_pass shall pass the each request to http://localhost:5000. Now save the file and to check if file has no error, run command:
+
+sudo nginx -t
+
+Now we can reload the configuration file with command:
+
+    sudo nginx -s reload
+
+If now we hit public-ip of instance with port 8081, we do not get nginx startup page instead we get 502 bad getway response. It is because we are routing requests to http://localhost:5000 but localhost is not yet setup and running.
+
+
+Step 15:
+
+Now exit from docker with ctrl+d
+
+close the terminal for instance as well. Now copy the zip file admin_publish.zip from local to ec2 instance with filezilla at location /home/ubuntu
+
+cd /home/ubuntu
+
+Now copy the file from ec2 instance to docker conatiner with command
+
+docker cp admin_publish.zip systemd_admin:/var/www/html
+
+Now get into docker conatiner with command
+
+docker exec -it systemd_admin bash
+
+We are inside docker again
+
+Step 16:
+
+install some packages
+
+apt install vim zip wget
+
+cd /var/www/html
+
+Now, extract tha file admin_publish.zip
+
+unzip admin_publish.zip
+
+cd publish
+
+dotnet Project_name.dll
+
+
+Step 17:
+
+now check status with
+http://IP:8081
+
+If its working then we need to make it permanently alive
+
+
+Step 18:
+
+vim /etc/systemd/system/ServiceFile.service
+
+add code--
+[Unit]
+Description=ASP .NET Web Application
+[Service]
+WorkingDirectory=/var/www/html/publish/
+ExecStart=/usr/bin/dotnet /var/www/html/publish/EcoTechAdmin.dll
+Restart=always
+RestartSec=10
+SyslogIdentifier=netcore-demo
+User=www-data
+Environment=ASPNETCORE_ENVIRONMENT=Production
+[Install]
+WantedBy=multi-user.target
+
+
+systemctl enable ServiceFile.service
+
+systemctl start ServiceFile.service
+
+systemctl status ServiceFile.service
+
+Step 19:
+
+
+Now close the docker to check if its still running
+
+http://IP:8081
+
+
+
+
+
+
+
+
+
+
+

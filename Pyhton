@@ -1,0 +1,11 @@
+--1 > data type
+
+string  -  its a text type e.g "this is 22"
+Integer(int) - whole number positive or negative wiuthout decimal e.g "44"
+Floating point number - numbers containing decimals "7.5"
+
+printing in python
+print("here we go")
+
+
+using arithmetic

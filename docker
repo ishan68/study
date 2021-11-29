@@ -1,0 +1,101 @@
+
+
+    how to search a docker image in hub.docker.com
+
+docker search httpd
+
+    Download a docker image from hub.docker.com
+
+docker image pull <image_name>:<image_version/tag>
+
+    List out docker images from your local system
+
+docker image ls
+
+    Create/run/start a docker container from image
+
+docker run -d --name <container_Name> <image_name>:<image_version/tag>
+
+d - run your container in back ground (detached)
+
+    Expose your application to host server
+
+docker run -d  -p <host_port>:<container_port> --name <container_Name> <image_name>:<Image_version/tag>
+
+docker run -d --name httpd_server -p 8080:80 httpd:2.2
+
+    List out running containers
+
+docker ps
+
+    List out all docker container (running, stpooed, terminated, etc...)
+
+docker ps -a
+
+    run a OS based container which interactive mode (nothing but login to container after it is up and running)
+
+docker run -i -t --name centos_server centos:latest
+i - interactive
+t - Terminal
+
+    Stop a container
+
+docker stop <container_id>
+
+    Start a container which is in stopped or exit state
+
+docker start <container_id>
+
+    Remove a container
+
+docker rm <container_id>
+
+    login to a docker container
+
+docker exec -it <container_Name> /bin/bash
+
+docker run -itd ubuntu - to run ubuntu permanantly
+
+docker exec -it container_name bash   - to go inside container
+
+docker run -dit --name container_name -p 8080:80 image_name
+
+
+to list conatiner ID :
+docker container ls -aq
+
+
+docker container rm ${docker container ls -aq}
+
+to check ip addr n all
+docker container inspect <containwer id>
+
+to check logs 
+docker container logs <CI>
+
+
+to see RAm consumption
+docker container stats
+
+docker run -d -p 3000:80 --name nginx_new nginx
+
+
+---------------------------------------JENKNS ON DOCKER_-----------------
+
+https://www.youtube.com/watch?v=iN3he0eVUyw&list=PLhW3qG5bs-L99pQsZ74f-LC-tOEsBp2rK&index=11
+
+----------------------------complete docker
+https://www.youtube.com/watch?v=3c-iBn73dDE
+
+docker network creattion
+
+-to check docker networks
+docker network ls
+
+---create network
+
+docker network create mongo-network
+
+docker run -d -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME=admin -e MONGO_INITDB_ROOT_PASSWORD=password --name mongodb --net mongo-network mongo    
+
+

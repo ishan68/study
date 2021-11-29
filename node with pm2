@@ -1,0 +1,13 @@
+npm install -g pm2
+
+pm2 start --name easyio main.js
+
+pm2 ls
+
+
+How to add pm2 startup sequence
+
+pm2 startup systemd -u ubuntu --hp /home/ubuntu 
+
+pm2 save = to save state of app
+

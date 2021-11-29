@@ -1,0 +1,15 @@
+pipeline {
+    agent any
+    stages {
+        stage("test"){
+            steps{
+                git credentialsId: 'git_cred', url: 'https://github.com/ishan68/hello-world'
+            }
+        }
+    }
+}
+
+
+
+use pipeline syntax to generate 
+

@@ -1,0 +1,63 @@
+to remove file from commit
+git reset --soft HEAD^
+
+to remove file from git add 
+git reset
+
+To merge changes in local from git
+git stash
+git pull orgin branch name
+git stash apply --index
+
+To remove local changes 
+git reset --hard
+
+To merge local branch
+
+git checkout -b branch2
+git merge branch1
+
+---------------logs---------------
+git log
+ to check more precisely
+git log --all --decorate --online --graph
+
+creating alias for this---
+alias graph="git log --all --decorate --online --graph"
+
+---check merged branches---
+git branch --merged
+
+-------STASH-----------
+git stash will save the current changes and let you switch or megre branches
+
+git stash
+
+-----to check stash list----
+git stash list
+
+---to apply recent stashed changes-----
+
+git stash apply
+
+---to remove and apply stashed changes-------
+
+git stash pop
+
+we can apply stashed changes via label
+
+git stash apply <label> 
+
+------------------------'
+merge - this will merge branch to other branch by adding a new commit
+
+git merge feature ------if i want to merge feature into master
+
+-------rebase----- rebase is moving all commits on the top of master's tip
+
+suppose I am on feature branch and I want to rebase it on master
+
+git rebase master
+
+
+
