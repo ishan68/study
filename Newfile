@@ -1,21 +1,49 @@
 mysql db805701310 -u dbo805701310 -p < db770686369.sql
 *(soundsgood?/
-
-
-<VirtualHost *:80>
-ServerName default:80
-DocumentRoot /var/www/vhosts/bixbypeller.com
-</VirtualHost>
+#####################################################Virtualhost with http2 and phpfpm
 
 <VirtualHost *:80>
-ServerName www.bixbypeller.com
-DocumentRoot /var/www/vhosts/bixbypeller.com
-ServerAdmin lorajakobsen@gmail.com
-<Directory /var/www/vhosts/bixbypeller.com>
-AllowOverride All
-</Directory>
+    ServerAdmin webmaster@localhost
+    ServerName cpdp-prod.kynapse.io
+    ServerAlias www.cpdp-prod.kynapse.io
+    DocumentRoot /var/www/html/web/
+    Redirect permanent / https://cpdp-prod.kynapse.io/
 </VirtualHost>
+<VirtualHost *:443>
+    Protocols h2 http/1.1
+    ServerAdmin webmaster@localhost
+    ServerName cpdp-prod.kynapse.io
+    ServerAlias www.cpdp-prod.kynapse.io
+    DocumentRoot /var/www/html/web/
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+    RequestHeader set "Host" "cpdp-prod.kynapse.io"
+    <Directory /var/www/html/web/>
+          Options -Indexes
+    </Directory>
 
+<Directory /var/www/html/>
+          Options -Indexes
+    </Directory>
+
+<FilesMatch \.php$>
+        # 2.4.10+ can proxy to unix socket
+        SetHandler "proxy:unix:/var/run/php/php7.3-fpm.sock|fcgi://localhost"
+    </FilesMatch>
+
+
+    <IfModule mod_dir.c>
+        DirectoryIndex index.php index.html index.cgi index.pl  index.xhtml index.htm
+    </IfModule>
+
+  SSLEngine on
+  SSLCertificateFile /etc/apache2/ssl/cpdp-prod_kynapse_io.crt
+  SSLCertificateKeyFile /etc/apache2/ssl/private/cpdp-prod.key
+  SSLCertificateChainFile  /etc/apache2/ssl/SectigoRSADomainValidationSecureServerCA.crt
+
+
+</VirtualHost>
+#####################################################################################################
 
 to update nodejs
 
