@@ -1,0 +1,21 @@
+VPC - its a virtual private cloud and completely out of the other insfrastructure on aws.You get full control upon its resources and flexibility with enhasnced security.
+Its a virtual data centre. it doesn't communicate with other vpc itself
+
+Components :-
+ :- 1 - IP addresses 
+  
+  Ranges - class A - 10.x.x.x
+           class B - 172 .31.x.x
+           class C - 192.168.x.x
+  
+  
+  :-2 - Subnets - its a complete range of private ip's and it consists of instances and each subnet is associated to a specific availibility zone
+   there are two type of subnets
+   
+   1 public e.g web servers
+   2 private e.g database servers
+   
+          
+  :-3 internet gateway - it opens the access to the internet and provides internet access to vpc only one single igw is sufficient fo one vpc
+  :- Route table - Its a set of routes which determines how the network traffic will flow in and out of a vpc
+  
