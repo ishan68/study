@@ -1,5 +1,11 @@
+REFRENCE VIDEO_-----------------
+
+https://www.youtube.com/watch?v=G4KJPLDGMiI
+
+
+
 VPC - its a virtual private cloud and completely out of the other insfrastructure on aws.You get full control upon its resources and flexibility with enhasnced security.
-Its a virtual data centre. it doesn't communicate with other vpc itself
+Its a virtual data centre. it doesn't communicate with other vpc itself. its region specific and each region you can have 5 VPC including default vpc
 
 Components :-
  :- 1 - IP addresses 
@@ -57,4 +63,24 @@ Components :-
                                                  subnet3 - 10.0.2.0/24
                                                  subnet3 - 10.0.3.0/24
                                             --so on till.  10.0.255.0/24
+                                            
+                                            
+  With this cidr we can have 256 subnets and  subnet3 instances  will have  - 10.0.2.1/32
+                                                                                      10.0.2.2/32. and so on till 10.0.2.255/32
+                                                                                      
+  SO total numbwe of instances with I can have in cidr 10.0.0.0/16 in vpc will be 256x256 = 65536
+  
+  
+  Public subnet - Now the every instance in public subnet should be provided with public ip and you have to attach IGW to public subnet and associate it with route table
+  The public subnet mostly consists of webservers
+  
+  Private subnet - consists of database and isolated from the internet so the question is how do I isolate it?
+  The answer is that you don't provide public ip's to private subnet instances(databases)
+  
+  Practical
+  Go to vpc and create new vpc.. give it a name and cidr of 10.0.0.0/16
+  
+  
+  
+  
   
