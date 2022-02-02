@@ -10,12 +10,35 @@ Components :-
   
   
   :-2 - Subnets - its a complete range of private ip's and it consists of instances and each subnet is associated to a specific availibility zone
-   there are two type of subnets
-   
+   there are two type of subnets   
    1 public e.g web servers
-   2 private e.g database servers
+   2 private e.g database servers we don't allot public ip's to private subnet and does not provide internet access
+   we have to expose webserver to internet in order to access it publically. which we can do by allocating public or elastic ip's and should have access to internet gateway
+    The linking between internet gateway and public subnet is done by route table
    
           
   :-3 internet gateway - it opens the access to the internet and provides internet access to vpc only one single igw is sufficient fo one vpc
-  :- Route table - Its a set of routes which determines how the network traffic will flow in and out of a vpc
+  :-4 Route table - Its a set of routes which determines how the network traffic will flow in and out of a vpc. It is a set of routes
+  :-5 NAT device - its a optional feature. It stands for network address translation device. It helps the instances in the private subnet to download the patches/updates
+  its launched in the public subnet and you associat an elastic ip to it
+  In order to connect private subnet to internet, Private subnet .i.e database will connect to NAT device through ROUTE TABle and then NAT device will
+  forward the traffic to internet. The NAT device will change the source ip to its own ip
+  e.g if private subnet has ip - 10.0.0.2 and the nat device has any public ip then it will show source ip as its onw elastic ip so that mean NAT device will hide the
+  private ip of subnet and act as that it has made a request to access internet
+  
+  NAT device is of two typers
+  
+  1 - NAT gateway - its a virtual gateway  and it is managed by aws and capable of high bandwidth
+  
+  
+  2 - NAT instance - its in instance and it is managed by customer and capable of low bandwith requirement
+  
+  
+  6:- NACL - network access control list - its a virtual firewall that applies to subnets
+           - security group is a type of firewall applies to EC2 instances 
+           The difference between these two firewalls are that NACL will allow or deny all traffic but security group will allow specific traffic to
+           specific instance
+  
+  
+  
   
