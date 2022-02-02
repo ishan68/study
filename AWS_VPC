@@ -40,5 +40,21 @@ Components :-
            specific instance
   
   
+  7:- VPG - virtual private gateway
+       CG - customer gateway 
+       
+       These both are used for vpn connection
+       
+  ################################################################
+  Different terms in vpc
   
+  CIDR - Classless inter domain routing  its the ip address range in vpc and subnet
+  e.g - cidr for vpc - 10.0.0.0/16
+  ipv4 is 32 bits means each octet is of 8bits
+  SO in 10.0.0.0/16 the /16 means  that first two bits are for netwoking and remaining two bits are of hosts.
+  For different subnets we will use cidr e.g for subnet1 - 10.0.0.0/24.  i.e the first 3 octet are for networking and just one octet will change
+                                                 subnet2 - 10.0.1.0/24
+                                                 subnet3 - 10.0.2.0/24
+                                                 subnet3 - 10.0.3.0/24
+                                            --so on till.  10.0.255.0/24
   
