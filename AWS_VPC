@@ -78,7 +78,38 @@ Components :-
   The answer is that you don't provide public ip's to private subnet instances(databases)
   
   Practical
-  Go to vpc and create new vpc.. give it a name and cidr of 10.0.0.0/16
+1.  Go to vpc and create new vpc.. give it a name and cidr of 10.0.0.0/16 create vpc now
+2.now create subnet public_subnet  add it to your vpc and give subnet 10.0.1.0/24
+3.now create second subnet private_subnet and give it 10.0.2.0/24
+4.Now create a internet gateway and attach it to vpc from selecting it left pane
+5.Now attach it to custom_vpc
+Now by doing this will create a route table which will be connected to vpc and only local traffic will flow. now instances can talk to each other internally
+But we need to create route table for public subnet only
+6- now create route table and go to its routes and edit routes add destination 0.0.0.0/0 and target as internet gateway
+now go to subnet association and select public subnet and save it...now you can check route table association by going to subnets
+NOte - You can allocate one route table only to one subnet but same route table can be allocated to mutliple subnet on same vpc
+7 - Now you can launch ec2 instance in public subnet by going to ec2 dashboard and select custom_vpc from configuration detail and select public vpc
+do it for public instance as well 
+By checking you will see there is no public ip here so attach elastic ip to it
+8 - Now the private subnet is not associated with public ip so its private. But we cann access it through by first sshing in public Instance and after that to
+private subnet via local route
+To get into private instance
+do - ssh-add -k ishan.pem
+ssh -A ubuntu@3.108.23.91
+now use private ip to ssh into private instanbce
+e.g ssh ubuntu@10.0.2.26 but the internet on it will not wok as it is connected to internet
+9 - for this will have to create NAT gateway so go to aws and select NAT gateway and select public_subnet and allocate elastic ip to it and click create
+In order to communicate private subnet to NAT we will have to create new route table and assign it to private subnet
+Now go to roues and edit it by adding 0.0.0.0/0 and with NAT now go to subnet association and assign private subnet and save it
+
+This is it hence the VPC is created
+
+--------------------------------------------------------------
+VPC peering - it is used to peer vpc's together connection can be elastablished bwtween separet rehgion and accounts
+
+
+
+
   
   
   
