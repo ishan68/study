@@ -41,6 +41,13 @@ mysql db805701310 -u dbo805701310 -p < db770686369.sql
   SSLCertificateKeyFile /etc/apache2/ssl/private/cpdp-prod.key
   SSLCertificateChainFile  /etc/apache2/ssl/SectigoRSADomainValidationSecureServerCA.crt
 
+  Protocols h2 http/1.1
+
+CacheRoot "/var/cache/apache-web-cache/"
+                         CacheEnable disk /
+                         CacheDirLevels 2
+                         CacheDirLength 1
+
 
 </VirtualHost>
 #####################################################################################################
