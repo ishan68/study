@@ -5,5 +5,10 @@ It is of two types
 1 - Farget hosted model
 2 - Ec2 hosted model
 
-Farget 
+ec2 hosted model - in this you will be able to see ec2 instances and within that there will be containers. In this model you will have to manage clusters and edverything.
+
+farget model - in this model aws will manage everythig and you won't see ec2 instances in dashboard. you just have to cpecify the size and type,
+
+Ec2 hosted are cheaper. But if your tasks are not running for very long and there is fluctations in resources then use frgate model.
+
 
