@@ -1,0 +1,9 @@
+ECs is used to manage and run container in aws. It is a cluster of EC2 instances and within ec2 instances there are serveral containers running. 
+It is highly scalable.
+It is of two types
+
+1 - Farget hosted model
+2 - Ec2 hosted model
+
+Farget 
+
