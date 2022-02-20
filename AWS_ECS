@@ -11,4 +11,9 @@ farget model - in this model aws will manage everythig and you won't see ec2 ins
 
 Ec2 hosted are cheaper. But if your tasks are not running for very long and there is fluctations in resources then use frgate model.
 
+Lets start with demo ----
+
+GO TO ecs give select ec2 with networking and give cluster a name pick instance type select instance key pair
+in networking - 
+
 
