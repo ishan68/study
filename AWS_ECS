@@ -13,6 +13,14 @@ Ec2 hosted are cheaper. But if your tasks are not running for very long and ther
 
 Lets start with demo ----
 
+Lets create ECR first
+Create a repo in ecr . e.g express-app
+Now you will have to create an IAM role and attach it to ec2 instance
+Go to IAM and click on  roles click create role and select ec2 and in permiison we have to attach AmazonEC2ContainerRegistryFullAccess 
+Now attach this role to ec2 instance
+Now create a private repo and selct it. click on view push commands and use command for log in ec2 terminal
+
+
 GO TO ecs give select ec2 with networking and give cluster a name pick instance type select instance key pair
 in networking - 
 
