@@ -1,4 +1,35 @@
+Differenec bwtween docker run and docker start -
+By default docker run will show the information coming out of container but docker start will not. to output anything from conatiner we need to add -a flag
+e.g docker start -a hello-world
 
+-----restaring stopped container----
+
+docker start containerid
+
+---remove all stopped container---
+
+docker system prune
+
+----checking logs----
+
+docker logs containerid
+
+--stop running container---
+ docker stop containerid
+  to stop instatntly
+  
+  docker kill containier id
+  
+ ---run commands inside container---
+ 
+ docker exec -it containerid redis-cli where - i is to type in input and getting its output and t is used to properly format the output
+ 
+ 
+ we can use docker run -it containerid sh   -to get inside container
+ 
+ -------Dockerfile------
+ It is used to build your own image
+ 
 
     how to search a docker image in hub.docker.com
 
