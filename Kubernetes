@@ -1,0 +1,7 @@
+These are used when you have to create different typ and number of conatiners on different machines
+
+In deverlopment we use it with progarame called "Minikube" and it is used to setup kubernetes on local machine
+and in production we can  use AWS-EKs or GKE of GCP and we can create kubernetes cluter by ourself but it is bit difficult so for starting we can use these managed
+cloud services
+Minikuber - it is used to mange VM(node) we use this only in local environment
+kubectl - use to manage and interact  conatiners in node. both in local and prod
