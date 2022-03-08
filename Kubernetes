@@ -5,3 +5,6 @@ and in production we can  use AWS-EKs or GKE of GCP and we can create kubernetes
 cloud services
 Minikuber - it is used to mange VM(node) we use this only in local environment
 kubectl - use to manage and interact  conatiners in node. both in local and prod
+
+
+pod - we are always going to deploy conatiner on it and we have to use pod to deploy containers
