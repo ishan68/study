@@ -13,5 +13,12 @@ containers
 service - sets up networking insiode kubernetes cluster and it has following types
   1 - cluster ip
   2 - NodePort - expose the port to outside world and it is yused only in dev env.
+      Port- this is use for coonecting with other container or pod
+      Target Port-- inside the conatiner port
   3 - LoadBalancer
   3 - ingress
+  
+  Kube proxy - Its a one single window to communicate to outside world.any request coming to node will flow through kube proxy anfd this will inspect the request and route it to
+  specific pod
+
+selector - it is use to identify on which service need to send traffic
