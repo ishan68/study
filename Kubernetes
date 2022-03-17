@@ -7,7 +7,7 @@ Minikuber - it is used to mange VM(node) we use this only in local environment
 kubectl - use to manage and interact  conatiners in node. both in local and prod
 
 
-pod - we are always going to deploy conatiner on it and we have to use pod to deploy containers. These are used if we ant to run one or more very closely related
+pod - we are always going to deploy conatiner on it and we have to use pod to deploy containers. These are used if we want to run one or more very closely related
 containers
 
 service - sets up networking insiode kubernetes cluster and it has following types
@@ -22,3 +22,19 @@ service - sets up networking insiode kubernetes cluster and it has following typ
   specific pod
 
 selector - it is use to identify on which service need to send traffic
+
+
+
+
+
+
+Kubectl get nodes
+kubectl get pod
+
+To create components we use create cmd
+e.g create nginx deployment
+
+kubectl create deployment ngin-depl --image=nginx
+now if i do - kubectl get deployment
+there is one more command to manage replicas of pod, which is
+kubectl get replicaset 
