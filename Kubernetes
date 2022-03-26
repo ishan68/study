@@ -1,4 +1,7 @@
 These are used when you have to create different typ and number of conatiners on different machines
+cluster - Assembly of master and one or mode nodes
+nodes - A node is a virtual machine or physical comp which is running container and each of them run different different conatiner with different images
+master - through which we interact with cluster
 
 In deverlopment we use it with progarame called "Minikube" and it is used to setup kubernetes on local machine
 and in production we can  use AWS-EKs or GKE of GCP and we can create kubernetes cluter by ourself but it is bit difficult so for starting we can use these managed
