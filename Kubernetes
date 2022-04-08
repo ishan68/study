@@ -100,6 +100,9 @@ spec:
   There's a another label specified in the config which could be different. We can specify multiple labels in config file
   
   Now feed it through kubectl and check if the website is available
+  
+  If somehow pod gets delted or gets recreated the ip of pod will get changed wnd which is difficult for us to change ip everytime on the browser
+  For this purpose services are used. The service will forward traffic by matching the labels. The pods which has same label will get the traffic
 
 
 
