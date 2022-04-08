@@ -49,9 +49,18 @@ kubectl get replicaset
 
 There are two types of deployments
 1- declarative 
-2- imperative
+2- imperative - 
 
 Its easier to use declarative deployments as we ask master to manage all thing where in imperative you need to define everything
+To get detailed description of object inside our cluster we use,'
+kubectl describe pods client-pod
+
+We can update config files for pod like it image and if we feed it to kubectl it will modify the current container it won't create new one
+but if we try to update port number, it will prompt a error message
+So to overcome this we use something called deployments
+Kind-Deployments - it maintains a idetical set of pods and always in runnable state
+The difference between pod and deployments is the pod runs a single set of container where as deployment can run multiple identical pods
+Deployment is good both dev and prod whereas pod is mostly used in dev env
 
 
 status will compare the current state with desired state.
