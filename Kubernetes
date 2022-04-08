@@ -98,6 +98,8 @@ spec:
             
   In this there is a spec block which has a selctor in it. This matchlabele is added to evry pods thats get created by deployment
   There's a another label specified in the config which could be different. We can specify multiple labels in config file
+  
+  Now feed it through kubectl and check if the website is available
 
 
 
