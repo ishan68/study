@@ -47,6 +47,12 @@ kubectl get replicaset
 2 - specifications
 3 - status
 
+There are two types of deployments
+1- declarative 
+2- imperative
+
+Its easier to use declarative deployments as we ask master to manage all thing where in imperative you need to define everything
+
 
 status will compare the current state with desired state.
 to get information of services
