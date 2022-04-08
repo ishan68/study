@@ -61,6 +61,7 @@ So to overcome this we use something called deployments
 Kind-Deployments - it maintains a idetical set of pods and always in runnable state
 The difference between pod and deployments is the pod runs a single set of container where as deployment can run multiple identical pods
 Deployment is good both dev and prod whereas pod is mostly used in dev env
+In deployments we can change any part of config file whereas in pod we can just change image name
 
 
 status will compare the current state with desired state.
@@ -70,3 +71,34 @@ to get ip address of pods
 - kubectl get pod -o wide
 delete services - kubectl delete -f nginx-servic.yml
 delete deployments - kubectl delete -f nginx-development.yml
+
+From now onwards we are gonna use deployments instead of pods as 
+example of deployment config file 
+
+
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: client-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: web
+  template:
+    metadata:
+      label:
+        component: web
+    spec:
+      containers:
+        - name: client
+          image: ishan68/nodejs-demo
+          ports:
+            - containerPort: 3000
+            
+  In this there is a spec block which has a selctor in it. This matchlabele is added to evry pods thats get created by deployment
+  There's a another label specified in the config which could be different. We can specify multiple labels in config file
+
+
+
+
