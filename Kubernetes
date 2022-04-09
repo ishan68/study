@@ -14,7 +14,7 @@ pod - we are always going to deploy conatiner on it and we have to use pod to de
 containers
 
 service - sets up networking insiode kubernetes cluster and it has following types
-  1 - cluster ip
+  1 - cluster ip - this service lets other containers to communicate but it can't be accessed outside of the cluster
   2 - NodePort - expose the port to outside world and it is yused only in dev env.
       Port- this is use for coonecting with other container or pod
       Target Port-- inside the conatiner port
@@ -120,7 +120,13 @@ kubectl set image <obeject type>/<object-name> <containername>=<image version>
 
 At first docker client on local machin is not connected with docker server on virtual machine. So to connect this we use commands
  eval $(minikube docker-env)
-But this is not permanebt
+But this is not permanent
+
+You can get inside of pod(conatiner) using kuberctl
+get name of pod- kubectl get pods
+kubectl exec -it <pod name> sh
+
+lets learn multicontainer
 
 
 
