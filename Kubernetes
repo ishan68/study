@@ -103,6 +103,26 @@ spec:
   
   If somehow pod gets delted or gets recreated the ip of pod will get changed wnd which is difficult for us to change ip everytime on the browser
   For this purpose services are used. The service will forward traffic by matching the labels. The pods which has same label will get the traffic
+  
+  We can descibe particular pod and check its info through this commands
+  
+  kubectl describe pod <pod name>
+  
+For example if the image gets changes or updated. For this we have to pull new image from the dockerhub
+So do some changes in your project and tag image
+docker build -t ishan68/nodejs-demo:1.1 .
+and then push it
+docker push ishan68/nodejs-demo:1.1
+to update this image on k8 we can use imperative method by using cmd
+
+ kubectl set image deployment/client-deployment client=ishan68/nodejs-demo:1.1
+kubectl set image <obeject type>/<object-name> <containername>=<image version>
+
+At first docker client on local machin is not connected with docker server on virtual machine. So to connect this we use commands
+ eval $(minikube docker-env)
+But this is not permanebt
+
+
 
 
 
