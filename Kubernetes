@@ -126,8 +126,12 @@ You can get inside of pod(conatiner) using kuberctl
 get name of pod- kubectl get pods
 kubectl exec -it <pod name> sh
 
-lets learn multicontainer
-
+volumes in kuberenets
+Simple volume is tied to pod and if pod dies it dies as well but 
+persistant volume is not tied to any pod. It will not die when pod dies
+Persistant volume claim - it ia advertisment of option and you can ask for one of those
+statistically provisioned vloume - created ahead of time
+dynamically provisioned volume - created when asked for
 
 
 
