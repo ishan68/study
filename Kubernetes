@@ -132,6 +132,22 @@ persistant volume is not tied to any pod. It will not die when pod dies
 Persistant volume claim - it ia advertisment of option and you can ask for one of those
 statistically provisioned vloume - created ahead of time
 dynamically provisioned volume - created when asked for
+voume config
+apiVersion: v1
+kind: PersistenVolumeClaim
+metadata:
+  name: database-persistent-volume-claim
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+      
+  Modes:
+  1 - ReadWriteOnce
+  2 - ReadOnlyMany
+  3 - ReadWriteMany
 
 
 
