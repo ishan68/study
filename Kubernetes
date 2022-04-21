@@ -148,6 +148,24 @@ spec:
   1 - ReadWriteOnce
   2 - ReadOnlyMany
   3 - ReadWriteMany
+  
+  
+  Environment valiable used:-
+  
+  REDIS_HOST
+  REDIS_PORT  these both will be used in multiworker
+  PGUSER
+  PGHOST
+  PGDATABASE
+  PGPORT
+  all these will be used in multi server
+  There's a one more valiable - PGPASSWORD which we will store as a secret and we are going to use imperative command
+  to store secret
+  the command is,
+  https://prnt.sc/1EACLnUas3Jl
+  
+  
+
 
 
 
