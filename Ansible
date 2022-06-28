@@ -2,7 +2,39 @@ https://www.youtube.com/watch?v=q8MX_ldXrt8
 
 Modules in asnible - yum
  shell
+ anible test -m shell -a 'll' 
+ service
+ ansible test -m service -a 'name=apache2 state=started' -become
  user 
  ping
  setup
  ansible test -m setup  to check setup of a system
+ copy 
+ ansible test -m copy -a 'src=path/to/src/ dest=/detinstaion/path' -u username
+ apt
+ ansible test -m apt -a 'name=apache2 state=present' -become -u ishan
+ 
+ 
+ Variable---
+ Variables in asnible are same as linux variables i.e some system valriables and some user defined varioables
+ variable can have alphabets, numbers and underscore but it can't start with a number and should not have space and - between
+ 
+ Variables with array
+ you can use arrays and assign them to variables
+variables with dictionary 
+
+Example of variable
+enabling selinux and disabling
+
+---
+- name: Enable or disable SELinux
+  hosts: test
+  vars:
+           status: disabled
+           tasks: 
+           - name: change SELinux config
+             lineinfile:
+                     path: /etc/selinux/config
+                     regexp: '^SELINUX='
+                     line: 'SELINUX={{ status }}'
+...
