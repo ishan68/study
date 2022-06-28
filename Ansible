@@ -46,3 +46,13 @@ we can use tags to skip certain steps in a yml file or can run specific tasks in
 use "--tags"  to run specific tags
 use "--skip-tags" to skip specific tags
 
+
+----ANSIBLE ROLES--------
+DEFAULT-  directory is for defining variable defaults
+and it has the lowest priority and If the variables are not defines anywherethen the variable in defaults/main.yml will be used
+
+FILES -  used for adding files
+
+HANDLERS- used for storing handlers
+
+META - use for storing authorship information
