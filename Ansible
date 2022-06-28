@@ -38,3 +38,11 @@ enabling selinux and disabling
                      regexp: '^SELINUX='
                      line: 'SELINUX={{ status }}'
 ...
+
+We can check sytax of a file through adding --syntax-check at the end
+
+---ANSIBLE TAGS---
+we can use tags to skip certain steps in a yml file or can run specific tasks inside yaml file
+use "--tags"  to run specific tags
+use "--skip-tags" to skip specific tags
+
