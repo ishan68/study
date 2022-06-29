@@ -56,3 +56,13 @@ FILES -  used for adding files
 HANDLERS- used for storing handlers
 
 META - use for storing authorship information
+
+TASKS - where we write all the roles which includes all task
+TEMPLATES - To add files to client machine
+ it supports alteraion where files directory doesn't
+ 
+TEST - we can use it if we have built an automated testing
+VAR - We define variables here
+
+To create this directory structure we can use cmd, 
+ansible-galaxy init /path/where/
